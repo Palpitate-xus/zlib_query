@@ -11,20 +11,58 @@
       :data="tableData"
       style="width: 100%">
       <el-table-column
-        prop="title"
-        label="日期"
-        width="180">
+        prop="id"
+        label="zlib ID"
+        sortable
+        >
       </el-table-column>
       <el-table-column
         prop="title"
-        label="author"
-        width="180">
+        label="title"
+        sortable
+        >
       </el-table-column>
       <el-table-column
         prop="author"
-        label="地址">
+        label="author"
+        sortable
+        >
       </el-table-column>
+      <el-table-column
+        prop="description"
+        label="description"
+        sortable
+        >
+      </el-table-column>
+      <el-table-column
+        prop="torrent"
+        label="torrent"
+        sortable
+        >
+      </el-table-column>
+      <el-table-column
+        prop="in_libgen"
+        label="in_libgen"
+        sortable
+        >
+      </el-table-column>
+      <el-table-column label="操作">
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row)">查看全部信息</el-button>
+      </template>
+    </el-table-column>
     </el-table>
+
+    <el-divider>@2022 
+      <a
+       href="mailto:palpitate.xus@outlook.com"
+       style="color: black; text-decoration: none;">
+        palpitate.xus@outlook.com
+      </a> 
+      All rights reserved
+    </el-divider>
   </div>
 </template>
 
@@ -34,7 +72,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      msg: 'Z-library Books Query System',
       input: '',
       tableData: [],
     }
