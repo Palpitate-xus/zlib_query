@@ -5,6 +5,7 @@
           v-model="input"
           placeholder="请输入内容"
           style="width: 50%;"
+          empty-text="NULL"
         ></el-input>
         <el-button @click="book_query">Find</el-button>
         <el-table
@@ -32,6 +33,7 @@
         prop="description"
         label="description"
         sortable
+        :show-overflow-tooltip="true"
         >
       </el-table-column>
       <el-table-column
@@ -49,7 +51,8 @@
       <el-table-column label="操作">
       <template slot-scope="scope">
         <el-button
-          size="mini"
+          size="small"
+          type="primary"
           @click="handleEdit(scope.$index, scope.row)">查看全部信息</el-button>
       </template>
     </el-table-column>
@@ -67,7 +70,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 export default {
   name: 'HelloWorld',
   data () {
@@ -81,6 +84,9 @@ export default {
     async book_query(){
       await axios.post('http://localhost:8000/api/book_query', this.input).then((res) => {
             console.log(res.data.data);
+            this.$alert('共找到' + res.data.data.length + '条内容', 'Info', {
+                confirmButtonText: '确定',
+            });
             this.tableData = res.data.data
           })
     }
