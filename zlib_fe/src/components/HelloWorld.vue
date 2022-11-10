@@ -30,6 +30,18 @@
         >
       </el-table-column>
       <el-table-column
+        prop="year"
+        label="year"
+        sortable
+        >
+      </el-table-column>
+      <el-table-column
+        prop="publisher"
+        label="publisher"
+        sortable
+        >
+      </el-table-column>
+      <el-table-column
         prop="description"
         label="description"
         sortable

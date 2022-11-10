@@ -11,7 +11,22 @@ def test(request):
 def book_query(request):
     book_name = request.body.decode()
     print(book_name)
-    data = Books.objects.filter(title__contains = book_name)
+    data = Books.objects.filter(title__contains = book_name).defer(
+        'md5', 
+        'md5_reported', 
+        'language', 
+        'cover_url',
+        'date_added',
+        'date_modified',
+        'filesize',
+        'series',
+        'volume',
+        'extension',
+        'description',
+        'edition',
+        'pages',
+        'unavailable',
+    )
     res = []
     for i in data:
         res.append({
@@ -20,23 +35,23 @@ def book_query(request):
             'author': i.author,
             'torrent': i.pilimi_torrent,
             'in_libgen': i.in_libgen,
-            'description': i.description,
-            'extension': i.extension,
-            'md5': i.md5,
-            'md5_reported': i.md5_reported,
+            # 'description': i.description,
+            # 'extension': i.extension,
+            # 'md5': i.md5,
+            # 'md5_reported': i.md5_reported,
             'publisher': i.publisher,
-            'language': i.language,
+            # 'language': i.language,
             'year': i.year,
-            'edition': i.edition,
-            'pages': i.pages,
-            'cover_url': i.cover_url,
-            'unavailable': i.unavailable,
-            'date_added': i.date_added,
-            'date_modified': i.date_modified,
-            'filesize': i.filesize,
+            # 'edition': i.edition,
+            # 'pages': i.pages,
+            # 'cover_url': i.cover_url,
+            # 'unavailable': i.unavailable,
+            # 'date_added': i.date_added,
+            # 'date_modified': i.date_modified,
+            # 'filesize': i.filesize,
             'filesize_reported': i.filesize_reported,
-            'series': i.series,
-            'volume': i.volume
+            # 'series': i.series,
+            # 'volume': i.volume
             })
         # res.append(i)
     response = {'code': 200, 'msg': 'success', 'data': res}
